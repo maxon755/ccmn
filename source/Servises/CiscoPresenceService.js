@@ -44,5 +44,4 @@ export default class CiscoPresenceService {
             }
         }).then(response => response.data);
     }
-
 }
