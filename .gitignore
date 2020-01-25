@@ -1,4 +1,5 @@
 .idea
+.env
 
 dist/bundle.js
 node_modules
