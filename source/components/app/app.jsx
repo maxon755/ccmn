@@ -1,14 +1,15 @@
 import React from 'react';
-import CiscoPresenseService from '../../Servises/CiscoPresenceService';
-import CiscoLocationService from "../../Servises/CiscoLocationService";
-
+import NavBar from "../nav-bar";
 
 const App = () => {
 
-    (CiscoLocationService.create()).getConnectedDevicesCount(1)
-        .then(res => console.log(res));
 
-    return ('APP WORKS');
+    return (
+        <div>
+            <NavBar/>
+            'APP WORKS'
+        </div>
+    );
 };
 
 export default App;

@@ -34,9 +34,14 @@ export default class CiscoLocationService {
         return instance;
     }
 
+    /**
+     * Get count of connected devices on specified floor
+     *
+     * @param floor int
+     *
+     * @returns Promise
+     */
     getConnectedDevicesCount(floor) {
-
-        console.log(this.floorId[floor]);
 
         return this.get('clients/count', {
             floorRefId: this.floorId[floor],
