@@ -1,14 +1,43 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from "../nav-bar";
+import SideBar from "../side-bar";
+import FirstFloorPage from "../../pages/first-floor-page";
+import SecondFloorPage from "../../pages/second-floor-page";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
+    toolbar: theme.mixins.toolbar,
+}));
 
 const App = () => {
 
+    const classes = useStyles();
 
     return (
-        <div>
-            <NavBar/>
-            'APP WORKS'
-        </div>
+        <BrowserRouter>
+            <div className={classes.root}>
+                <NavBar/>
+                <SideBar/>
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
+                    <Switch>
+                        <Route path="/first-floor" component={FirstFloorPage}/>
+                    </Switch>
+                    <Switch>
+                        <Route path="/second-floor" component={SecondFloorPage}/>
+                    </Switch>
+                </main>
+            </div>
+
+        </BrowserRouter>
     );
 };
 

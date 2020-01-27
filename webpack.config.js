@@ -6,6 +6,7 @@ const Dotenv = require('dotenv-webpack');
 module.exports = (env, argv) => {
 
     return {
+        mode: argv.mode || 'development',
         entry: './source/index.jsx',
         output: {
             filename: 'bundle.js',
