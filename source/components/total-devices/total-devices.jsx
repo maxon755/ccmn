@@ -1,34 +1,19 @@
 import React from 'react';
-import Typography from "@material-ui/core/Typography";
+import Typography from '@material-ui/core/Typography';
+import WithApiCall from '../../hocs/with-api-call'
 import CiscoLocationService from "../../servises/CiscoLocationService";
 
-class TotalDevices extends React.Component {
+const TotalDevices = (props) => {
 
-    constructor(props) {
-        super(props);
+    return (
+        <div>
+            <Typography variant="h6" noWrap>
+                Total Connected Devices: {props.data}
+            </Typography>
+        </div>
+    );
+};
 
-        this.state = {
-            totalDevices: null
-        };
-    }
-
-    componentDidMount() {
-        CiscoLocationService.create()
-            .getTotalConnectedDevicesCount()
-            .then(totalDevices => this.setState({
-                totalDevices: totalDevices
-            }));
-    }
-
-    render() {
-        return (
-            <div>
-                <Typography variant="h6" noWrap>
-                    Total Connected Devices: {this.state.totalDevices}
-                </Typography>
-            </div>
-        );
-    }
-}
-
-export default TotalDevices;
+export default WithApiCall(TotalDevices, () => {
+    return CiscoLocationService.create().getTotalConnectedDevicesCount();
+});
