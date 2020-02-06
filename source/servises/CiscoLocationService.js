@@ -19,7 +19,7 @@ export default class CiscoLocationService {
             },
         });
 
-        this.floorId = {
+        this.floors = {
             1: '735495909441273878',
             2: '735495909441273979',
             3: '735495909441273980',
@@ -43,9 +43,26 @@ export default class CiscoLocationService {
      */
     getConnectedDevicesCount(floor) {
 
+        if (!this.floors.hasOwnProperty(floor)) {
+            throw 'Wrong floor number: ' + floor + '; Choose on of [1, 2, 3]';
+        }
+
         return this.get('clients/count', {
-            floorRefId: this.floorId[floor],
+            floorRefId: this.floors[floor],
             dot11Status: 'ASSOCIATED',
+        })
+            .then(response => response.count);
+    }
+
+    getTotalConnectedDevicesCount() {
+        return Promise.all([
+            this.getConnectedDevicesCount(1),
+            this.getConnectedDevicesCount(2),
+            this.getConnectedDevicesCount(3)
+        ]).then(values => {
+            return values.reduce((sum, value) => {
+                return sum + value
+            }, 0);
         });
     }
 
