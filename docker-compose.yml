@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  node:
+    build: ./.docker/
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env
+
+    command: "npm run start"
