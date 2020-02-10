@@ -42,7 +42,6 @@ export default class CiscoLocationService {
      * @returns Promise
      */
     getConnectedDevicesCount(floor) {
-
         if (!this.floors.hasOwnProperty(floor)) {
             throw 'Wrong floor number: ' + floor + '; Choose on of [1, 2, 3]';
         }
