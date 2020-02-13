@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import WithApiCall from '../../hocs/with-api-call'
-import CiscoLocationService from "../../servises/CiscoLocationService";
+import CmxClient from "../../servises/CmxClient";
 
 const TotalDevices = (props) => {
 
@@ -15,5 +15,5 @@ const TotalDevices = (props) => {
 };
 
 export default WithApiCall(TotalDevices, () => {
-    return CiscoLocationService.create().getTotalConnectedDevicesCount();
+    return CmxClient.getInstance().getTotalConnectedDevicesCount();
 });

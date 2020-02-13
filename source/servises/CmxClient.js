@@ -2,11 +2,11 @@ import axios from 'axios';
 
 let instance;
 
-export default class CiscoLocationService {
+export default class CmxClient {
 
     constructor() {
         if (instance) {
-            throw "Instantiation failed: use CiscoLocationService.create() instead of new."
+            throw "Instantiation failed: use CmxClient.getInstance() instead of new."
         }
 
         const user = process.env.CISCO_LOCATION_LOGIN;
@@ -26,9 +26,9 @@ export default class CiscoLocationService {
         }
     }
 
-    static create() {
+    static getInstance() {
         if (!instance) {
-            instance = new CiscoLocationService();
+            instance = new CmxClient();
         }
 
         return instance;
@@ -54,21 +54,22 @@ export default class CiscoLocationService {
     }
 
     getTotalConnectedDevicesCount() {
-        return Promise.all([
-            this.getConnectedDevicesCount(1),
-            this.getConnectedDevicesCount(2),
-            this.getConnectedDevicesCount(3)
-        ]).then(values => {
-            return values.reduce((sum, value) => {
-                return sum + value
-            }, 0);
-        });
+        return this.get('location/v2/clients/count', {
+            dot11Status: 'ASSOCIATED'
+        })
+            .then(response => response.count);
     }
 
-    get(url, params = {}, version = 1) {
+    getFirstFlourData() {
+        return this.get(
+            '/config/v1/maps/info/System%20Campus/UNIT.Factory/1st_Floor'
+        );
+    }
+
+    get(url, params = {}) {
         return this.axios({
             method: 'get',
-            url: `/v${version}/` + url,
+            url: url,
             params: {
                 ...params,
             }

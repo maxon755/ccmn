@@ -6,7 +6,7 @@ export default class CiscoPresenceService {
 
     constructor() {
         if (instance) {
-            throw "Instantiation failed: use CiscoPresenceService.create() instead of new."
+            throw "Instantiation failed: use CiscoPresenceService.getInstance() instead of new."
         }
 
         const user = process.env.CISCO_PRESENCE_LOGIN;
@@ -22,7 +22,7 @@ export default class CiscoPresenceService {
         })
     }
 
-    static create() {
+    static getInstance() {
         if (!instance) {
             instance = new CiscoPresenceService();
         }
