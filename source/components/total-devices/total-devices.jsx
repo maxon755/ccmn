@@ -1,6 +1,6 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import WithApiCall from '../../hocs/with-api-call'
+import WithPeriodicApiCall from '../../hocs/with-periodic-api-call'
 import CmxClient from "../../servises/CmxClient";
 
 const TotalDevices = (props) => {
@@ -14,6 +14,6 @@ const TotalDevices = (props) => {
     );
 };
 
-export default WithApiCall(TotalDevices, () => {
+export default WithPeriodicApiCall(TotalDevices, () => {
     return CmxClient.getInstance().getTotalConnectedDevicesCount();
 });

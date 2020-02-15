@@ -1,3 +1,3 @@
-import WithApiCall from './with-api-call.jsx'
+import WithApiCall from './with-api-call.jsx';
 
 export default WithApiCall;

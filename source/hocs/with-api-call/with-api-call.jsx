@@ -1,27 +1,27 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Spinner from "../../components/spinner";
 
-const WithApiCall = (WrappedComponent, apiCall, interval = 20000) => {
+/**
+ * @param WrappedComponent ReactComponent
+ * @param apiCall function
+ */
+const WithApiCall = (WrappedComponent, apiCall) => {
 
-    return () => {
-        const [data, setData] = useState();
-
-        const performRequest = () => apiCall().then(data => setData(data));
+    const WithApiCall = (props) => {
+        const [data, setData] = useState(null);
 
         useEffect(() => {
-            performRequest();
-            const counterId = setInterval(performRequest, interval);
-
-            return () => clearInterval(counterId);
-        });
+            apiCall(props).then(data => setData(data));
+        }, []);
 
         return (
             <div>
-                {data ? <WrappedComponent data={data} /> : <Spinner width={18} />}
+                {data ? <WrappedComponent data={data} {...props} /> : <div />}
             </div>
         )
-    }
+    };
+
+    return WithApiCall;
 };
 
 export default WithApiCall;

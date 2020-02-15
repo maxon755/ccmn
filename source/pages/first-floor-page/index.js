@@ -1,3 +1,3 @@
-import FirstFloorPage from './first-floor-pages.jsx'
+import FirstFloorPage from './first-floor-page.jsx'
 
 export default FirstFloorPage;

@@ -20,7 +20,7 @@ export default class CmxClient {
         });
 
         this.floors = {
-            1: '735495909441273878',
+            1: '1st_Floor',
             2: '735495909441273979',
             3: '735495909441273980',
         }
@@ -60,19 +60,45 @@ export default class CmxClient {
             .then(response => response.count);
     }
 
-    getFirstFlourData() {
+    /**
+     * Get general data of the specific floor.
+     *
+     * @param floor int
+     */
+    getFloorData(floor) {
+        if (!this.floors.hasOwnProperty(floor)) {
+            throw 'Wrong floor number: ' + floor + '; Choose on of [1, 2, 3]';
+        }
+
         return this.get(
-            '/config/v1/maps/info/System%20Campus/UNIT.Factory/1st_Floor'
+            'config/v1/maps/info/System%20Campus/UNIT.Factory/' + this.floors[floor]
         );
     }
 
-    get(url, params = {}) {
+    /**
+     * Get floor image by name
+     * @param imageName string
+     * @returns Promise
+     */
+    getFloorImage(imageName) {
+        return this.get('config/v1/maps/imagesource/' + imageName, {},'blob')
+            .then(blob => {
+                return new Promise(resolve => {
+                    const reader = new window.FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onload = () => resolve(reader.result);
+                })
+            })
+    }
+
+    get(url, params = {}, responseType) {
         return this.axios({
             method: 'get',
             url: url,
             params: {
                 ...params,
-            }
+            },
+            responseType
         }).then(response => response.data);
     }
 }
