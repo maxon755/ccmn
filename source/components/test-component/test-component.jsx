@@ -1,18 +1,22 @@
 import React from 'react';
 import WithApiCall from '../../hocs/with-api-call';
 import CmxClient from '../../servises/CmxClient';
+import WithPeriodicApiCall from "../../hocs/with-periodic-api-call";
 
 const TestComponent = (props) => {
 
-    console.log(props);
-
     return (
         <div>
-            <img src={props.data} width={1000}/>
+            {props.clientsData.length}
+            <img src={props.image}/>
         </div>
     )
 };
 
-export default WithApiCall(TestComponent, (props) => {
-    return CmxClient.getInstance().getFloorImage(props.image.imageName)
+const WithImage = WithApiCall(TestComponent, (props) => {
+    return CmxClient.getInstance().getFloorImage(props.imageData.imageName)
+});
+
+export default WithPeriodicApiCall(WithImage, (props) => {
+    return CmxClient.getInstance().getClientsData(props.floorId)
 });

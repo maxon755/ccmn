@@ -8,7 +8,7 @@ const TotalDevices = (props) => {
     return (
         <div>
             <Typography variant="h6" noWrap>
-                Total Connected Devices: {props.data}
+                Total Connected Devices: {props.totalConnectedDevices}
             </Typography>
         </div>
     );

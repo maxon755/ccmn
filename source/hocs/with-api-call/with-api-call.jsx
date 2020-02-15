@@ -16,7 +16,7 @@ const WithApiCall = (WrappedComponent, apiCall) => {
 
         return (
             <div>
-                {data ? <WrappedComponent data={data} {...props} /> : <div />}
+                {data ? <WrappedComponent {...data} {...props} /> : <div />}
             </div>
         )
     };

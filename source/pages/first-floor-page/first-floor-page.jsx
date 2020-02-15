@@ -8,13 +8,12 @@ const FirstFloorPage = (props) => {
     return (
         <div>
             First Floor Page
-            <TestComponent image={props.data.image} />
+            <TestComponent floorId={props.floorData.aesUidString} imageData={props.floorData.image} />
         </div>
 
     );
 };
 
 export default WithApiCall(
-    FirstFloorPage,
-    () => CmxClient.getInstance().getFloorData(1)
+    FirstFloorPage, () => CmxClient.getInstance().getFloorData(1)
 );

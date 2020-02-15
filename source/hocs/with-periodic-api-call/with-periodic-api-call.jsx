@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
  * @param apiCall function
  * @param interval int
  */
-const WithPeriodicApiCall = (WrappedComponent, apiCall, interval = 20000) => {
+const WithPeriodicApiCall = (WrappedComponent, apiCall, interval = 5000) => {
 
-    return () => {
-        const [data, setData] = useState([]);
+    const WithPeriodicApiCall = (props) => {
+        const [data, setData] = useState(null);
 
-        const performRequest = () => apiCall().then(data => setData(data));
+        const performRequest = () => apiCall(props).then(data => setData(data));
 
         useEffect(() => {
             performRequest();
@@ -20,8 +20,14 @@ const WithPeriodicApiCall = (WrappedComponent, apiCall, interval = 20000) => {
             return () => clearInterval(counterId);
         }, []);
 
-        return <WrappedComponent data={data} />
-    }
+        return (
+            <div>
+                {data ? <WrappedComponent {...data} {...props} /> : <div />}
+            </div>
+        )
+    };
+
+    return WithPeriodicApiCall;
 };
 
 export default WithPeriodicApiCall;

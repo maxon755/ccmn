@@ -57,7 +57,11 @@ export default class CmxClient {
         return this.get('location/v2/clients/count', {
             dot11Status: 'ASSOCIATED'
         })
-            .then(response => response.count);
+            .then(response => {
+                return {
+                    totalConnectedDevices: response.count
+                }
+            });
     }
 
     /**
@@ -72,7 +76,7 @@ export default class CmxClient {
 
         return this.get(
             'config/v1/maps/info/System%20Campus/UNIT.Factory/' + this.floors[floor]
-        );
+        ).then(data => { return { floorData: data }});
     }
 
     /**
@@ -88,7 +92,17 @@ export default class CmxClient {
                     reader.readAsDataURL(blob);
                     reader.onload = () => resolve(reader.result);
                 })
+            }).then(image => {
+                return {image}
             })
+    }
+
+    getClientsData(floorId) {
+        return this.get('location/v1/clients', {
+            floorRefId: floorId
+        }).then(data => {
+            return { clientsData: data }
+        })
     }
 
     get(url, params = {}, responseType) {
