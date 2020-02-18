@@ -1,14 +1,14 @@
 import React from 'react';
 import CmxClient from '../../servises/CmxClient';
 import WithApiCall from '../../hocs/with-api-call';
-import TestComponent from '../../components/test-component'
+import ClientsLocation from '../../components/clients-location'
 
 const FirstFloorPage = (props) => {
 
     return (
         <div>
             First Floor Page
-            <TestComponent floorId={props.floorData.aesUidString} imageData={props.floorData.image} />
+            <ClientsLocation floorId={props.floorData.aesUidString} imageData={props.floorData.image} />
         </div>
 
     );

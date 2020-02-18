@@ -92,7 +92,10 @@ export default class CmxClient {
                     reader.readAsDataURL(blob);
                     reader.onload = () => resolve(reader.result);
                 })
-            }).then(image => {
+            }).then(imageSource => {
+                const image = new Image();
+                image.src = imageSource;
+
                 return {image}
             })
     }

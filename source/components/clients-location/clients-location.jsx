@@ -4,7 +4,7 @@ import CmxClient from '../../servises/CmxClient';
 import WithPeriodicApiCall from "../../hocs/with-periodic-api-call";
 import { Image, Layer, Circle, Stage} from "react-konva";
 
-const TestComponent = (props) => {
+const ClientsLocation = (props) => {
 
     console.dir(props);
 
@@ -43,7 +43,7 @@ const TestComponent = (props) => {
     )
 };
 
-const WithImage = WithApiCall(TestComponent, (props) => {
+const WithImage = WithApiCall(ClientsLocation, (props) => {
     return CmxClient.getInstance().getFloorImage(props.imageData.imageName)
 });
 
