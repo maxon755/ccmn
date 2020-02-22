@@ -37,20 +37,21 @@ export default class CmxClient {
     /**
      * Get count of connected devices on specified floor
      *
-     * @param floor int
+     * @param floorId int
      *
      * @returns Promise
      */
-    getConnectedDevicesCount(floor) {
-        if (!this.floors.hasOwnProperty(floor)) {
-            throw 'Wrong floor number: ' + floor + '; Choose on of [1, 2, 3]';
-        }
+    getConnectedDevicesCount(floorId, associated) {
 
-        return this.get('clients/count', {
-            floorRefId: this.floors[floor],
-            dot11Status: 'ASSOCIATED',
+        return this.get('location/v1/clients/count', {
+            floorRefId: floorId,
+            dot11Status: associated ? 'ASSOCIATED' : null,
         })
-            .then(response => response.count);
+            .then(response => {
+                return {
+                    clientsCount: response.count
+                }
+            });
     }
 
     getTotalConnectedDevicesCount() {

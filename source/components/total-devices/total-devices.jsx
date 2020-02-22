@@ -6,12 +6,9 @@ import CmxClient from "../../servises/CmxClient";
 const TotalDevices = (props) => {
 
     return (
-        <div>
-            <Typography variant="h6" noWrap>
-                Connected Devices: {props.totalConnectedDevices}
-            </Typography>
-        </div>
-
+        <Typography variant="h6" noWrap>
+            Connected Devices: {props.totalConnectedDevices}
+        </Typography>
     );
 };
 

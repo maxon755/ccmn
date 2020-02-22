@@ -7,7 +7,7 @@ import ClientDataTable from "../client-data-table";
 
 
 const scaleImage = image => {
-    const ratio = 1200 / image.width;
+    const ratio = 1100 / image.width;
     image.width *= ratio;
     image.height *= ratio;
 
