@@ -34,6 +34,10 @@ export default class CmxClient {
         return instance;
     }
 
+    setSignal(signal) {
+        this.signal = signal;
+    }
+
     /**
      * Get count of connected devices on specified floor
      *
@@ -116,7 +120,8 @@ export default class CmxClient {
             params: {
                 ...params,
             },
-            responseType
+            responseType,
+            cancelToken: this.signal.token
         }).then(response => response.data);
     }
 }
