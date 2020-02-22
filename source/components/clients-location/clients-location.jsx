@@ -1,48 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import WithApiCall from '../../hocs/with-api-call';
 import CmxClient from '../../servises/CmxClient';
-import WithPeriodicApiCall from "../../hocs/with-periodic-api-call";
-import { Image, Layer, Circle, Stage} from "react-konva";
+import WithPeriodicApiCall from '../../hocs/with-periodic-api-call';
+import { Image, Layer, Circle, Stage } from 'react-konva';
+import ClientDataTable from "../client-data-table";
 
-const ClientsLocation = (props) => {
 
-    console.dir(props);
-
-    const image = props.image;
+const scaleImage = image => {
     const ratio = 1200 / image.width;
     image.width *= ratio;
     image.height *= ratio;
 
-    const clientsLocation = props.clientsData.map( (clientData) => {
+    return image;
+};
 
+const computeClientsLocation = (image, clientsData, clickHandler) => {
+
+    return clientsData.map(clientData => {
         const scaleWidth = image.width / clientData.mapInfo.floorDimension.width;
         const scaleHeight = image.height / clientData.mapInfo.floorDimension.length;
 
         return (
             <Circle
-                onHover={() => {
-                    console.log('hover');
+                onClick={() => {
+                    clickHandler(clientData);
                 }}
                 key={clientData.macAddress}
                 x={clientData.mapCoordinate.x * scaleWidth}
                 y={clientData.mapCoordinate.y * scaleHeight}
-                radius={5}
+                radius={7}
                 fill={clientData.dot11Status === 'ASSOCIATED' ? 'blue' : 'red'}
+                stroke={'black'}
+                strokeWidth={1}
             />
-        );
-    });
+        )});
+
+};
+
+const ClientsLocation = (props) => {
+
+    const [clientData, setClientData] = useState(null);
+
+    const image = scaleImage(props.image);
+
+    const handleClick = (data) => {
+        setClientData(data)
+    };
 
     return (
-        <Stage width={image.width} height={image.height}>
-            <Layer>
-                <Image
-                    x={0}
-                    y={0}
-                    image={props.image}
-                />
-                {clientsLocation}
-            </Layer>
-        </Stage>
+        <div>
+            <Stage id={'floorMap'} width={image.width} height={image.height}>
+                <Layer>
+                    <Image
+                        x={0}
+                        y={0}
+                        image={props.image}
+                    />
+                    {computeClientsLocation(image, props.clientsData, handleClick)}
+                </Layer>
+            </Stage>
+            {clientData ? <ClientDataTable clientData={clientData}/> : ''}
+        </div>
     )
 };
 

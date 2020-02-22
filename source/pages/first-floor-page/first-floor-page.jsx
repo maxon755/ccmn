@@ -6,11 +6,7 @@ import ClientsLocation from '../../components/clients-location'
 const FirstFloorPage = (props) => {
 
     return (
-        <div>
-            First Floor Page
-            <ClientsLocation floorId={props.floorData.aesUidString} imageData={props.floorData.image} />
-        </div>
-
+        <ClientsLocation floorId={props.floorData.aesUidString} imageData={props.floorData.image} />
     );
 };
 
