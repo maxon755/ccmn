@@ -5,7 +5,8 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import ExploreIcon from '@material-ui/icons/Explore';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
@@ -41,15 +42,22 @@ export default function SideBar() {
             <List>
                 <Link to="/first-floor" className={classes.link}>
                     <ListItem button>
-                        <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                        <ListItemIcon>{<ExploreIcon />}</ListItemIcon>
                         <ListItemText primary={'First Floor'} />
                     </ListItem>
                 </Link>
 
                 <Link to="/second-floor" className={classes.link}>
                     <ListItem button>
-                        <ListItemIcon>{<InboxIcon />}</ListItemIcon>
+                        <ListItemIcon>{<ExploreIcon />}</ListItemIcon>
                         <ListItemText primary={'Second Floor'} />
+                    </ListItem>
+                </Link>
+
+                <Link to="/analytics" className={classes.link}>
+                    <ListItem button>
+                        <ListItemIcon>{<AssessmentIcon />}</ListItemIcon>
+                        <ListItemText primary={'Analytics'} />
                     </ListItem>
                 </Link>
             </List>

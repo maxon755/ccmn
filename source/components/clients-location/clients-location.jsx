@@ -20,6 +20,9 @@ const ClientsLocation = (props) => {
 
         return (
             <Circle
+                onHover={() => {
+                    console.log('hover');
+                }}
                 key={clientData.macAddress}
                 x={clientData.mapCoordinate.x * scaleWidth}
                 y={clientData.mapCoordinate.y * scaleHeight}

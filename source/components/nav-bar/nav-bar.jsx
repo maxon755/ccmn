@@ -9,6 +9,11 @@ const useStyles = makeStyles(theme => ({
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
     },
+
+    toolBar: {
+        'justifyContent': 'space-between',
+    },
+
 }));
 
 export default function NavBar() {
@@ -16,7 +21,7 @@ export default function NavBar() {
 
     return (
         <AppBar position="fixed" className={classes.appBar}>
-            <Toolbar>
+            <Toolbar className={classes.toolBar}>
                 <Typography variant="h6" noWrap>
                     CCMN
                 </Typography>
