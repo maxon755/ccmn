@@ -3,7 +3,7 @@ import CmxClient from '../../servises/CmxClient';
 import WithApiCall from '../../hocs/with-api-call';
 import ClientsLocation from '../../components/clients-location'
 
-const SecondFloorPage = (props) => {
+const ThirdFloorPage = (props) => {
 
     return (
         <ClientsLocation floorId={props.floorData.aesUidString} imageData={props.floorData.image} />
@@ -11,5 +11,5 @@ const SecondFloorPage = (props) => {
 };
 
 export default WithApiCall(
-    SecondFloorPage, () => CmxClient.getInstance().getFloorData(2)
+    ThirdFloorPage, () => CmxClient.getInstance().getFloorData(3)
 );

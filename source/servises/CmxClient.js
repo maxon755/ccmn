@@ -21,8 +21,8 @@ export default class CmxClient {
 
         this.floors = {
             1: '1st_Floor',
-            2: '735495909441273979',
-            3: '735495909441273980',
+            2: '2nd_Floor',
+            3: '3rd_Floor',
         }
     }
 

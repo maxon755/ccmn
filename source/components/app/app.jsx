@@ -4,6 +4,7 @@ import NavBar from '../nav-bar';
 import SideBar from '../side-bar';
 import FirstFloorPage from '../../pages/first-floor-page';
 import SecondFloorPage from '../../pages/second-floor-page';
+import ThirdFloorPage from '../../pages/third-floor-page';
 import { makeStyles } from '@material-ui/core/styles';
 import Analytics from '../../pages/analytics';
 
@@ -32,6 +33,7 @@ const App = () => {
                     <Switch>
                         <Route path={'/first-floor'} component={FirstFloorPage}/>
                         <Route path={'/second-floor'} component={SecondFloorPage}/>
+                        <Route path={'/third-floor'} component={ThirdFloorPage}/>
                         <Route path={'/analytics'} component={Analytics}/>
                     </Switch>
                 </main>

@@ -54,6 +54,13 @@ export default function SideBar() {
                     </ListItem>
                 </Link>
 
+                <Link to="/third-floor" className={classes.link}>
+                    <ListItem button>
+                        <ListItemIcon>{<ExploreIcon />}</ListItemIcon>
+                        <ListItemText primary={'Third Floor'} />
+                    </ListItem>
+                </Link>
+
                 <Link to="/analytics" className={classes.link}>
                     <ListItem button>
                         <ListItemIcon>{<AssessmentIcon />}</ListItemIcon>
