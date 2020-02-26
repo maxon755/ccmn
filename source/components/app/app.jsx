@@ -6,7 +6,7 @@ import FirstFloorPage from '../../pages/first-floor-page';
 import SecondFloorPage from '../../pages/second-floor-page';
 import ThirdFloorPage from '../../pages/third-floor-page';
 import { makeStyles } from '@material-ui/core/styles';
-import Analytics from '../../pages/analytics';
+import AnalyticsPage from '../../pages/analytics-page';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,7 +34,7 @@ const App = () => {
                         <Route path={'/first-floor'} component={FirstFloorPage}/>
                         <Route path={'/second-floor'} component={SecondFloorPage}/>
                         <Route path={'/third-floor'} component={ThirdFloorPage}/>
-                        <Route path={'/analytics'} component={Analytics}/>
+                        <Route path={'/analytics'} component={AnalyticsPage}/>
                     </Switch>
                 </main>
             </div>
