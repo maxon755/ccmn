@@ -19,7 +19,13 @@ const DatePicker = () => {
         key: 'selection',
     });
 
+    let [buttonName, setButtonName] = useState('Choose Date');
+
     const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' });
+
+    const handleButtonName = ({startDate, endDate}) => {
+        setButtonName(startDate.toDateString() + ' - ' + endDate.toDateString())
+    };
 
     return (
         <div>
@@ -27,7 +33,7 @@ const DatePicker = () => {
                 {popupState => (
                     <React.Fragment>
                         <Button variant="contained" color="primary" {...bindTrigger(popupState)}>
-                            Open Menu
+                            {buttonName}
                         </Button>
                         <Menu {...bindMenu(popupState)}
                               getContentAnchorEl={null}
@@ -38,7 +44,12 @@ const DatePicker = () => {
                             <DateRangePicker
                                 ranges={[dateRange]}
                                 onChange={(ranges) => {
-                                    console.log(ranges);
+                                    setDateRange({
+                                        startDate: ranges.selection.startDate,
+                                        endDate: ranges.selection.endDate,
+                                        key: 'selection',
+                                    });
+                                    handleButtonName(ranges.selection);
                                 }}
                             />
                         </Menu>
