@@ -9,9 +9,10 @@ import {
     usePopupState,
     bindTrigger,
     bindMenu,
-} from 'material-ui-popup-state/hooks'
+} from 'material-ui-popup-state/hooks';
+import DateHelper from '../../helpers/DateHelper';
 
-const DatePicker = () => {
+const DatePicker = ({onDateChangeHandler}) => {
 
     let [dateRange, setDateRange] = useState({
         startDate: new Date(),
@@ -24,7 +25,7 @@ const DatePicker = () => {
     const popupState = usePopupState({ variant: 'popover', popupId: 'demoMenu' });
 
     const handleButtonName = ({startDate, endDate}) => {
-        setButtonName(startDate.toDateString() + ' - ' + endDate.toDateString())
+        setButtonName(DateHelper.toIsoDateString(startDate) + ' - ' + DateHelper.toIsoDateString(endDate))
     };
 
     return (
@@ -50,6 +51,7 @@ const DatePicker = () => {
                                         key: 'selection',
                                     });
                                     handleButtonName(ranges.selection);
+                                    onDateChangeHandler(ranges.selection);
                                 }}
                             />
                         </Menu>

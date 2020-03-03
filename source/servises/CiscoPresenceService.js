@@ -22,6 +22,10 @@ export default class CiscoPresenceService {
         })
     }
 
+    setSignal(signal) {
+        this.signal = signal;
+    }
+
     static getInstance() {
         if (!instance) {
             instance = new CiscoPresenceService();
@@ -30,18 +34,29 @@ export default class CiscoPresenceService {
         return instance;
     }
 
-    testRequest() {
-        return this.get('repeatvisitors/count/today')
+
+    getTotalVisitors(startDate, endDate)
+    {
+        return this.get('visitor/total', {
+            startDate,
+            endDate
+        }).then(data => {
+
+            return {
+                totalVisitors: data
+            };
+        })
     }
 
     get(url, params = {}, version = 1) {
         return this.axios({
             method: 'get',
-            url: `/v${version}/` + url,
+            url: '/v' + version + '/' + url,
             params: {
                 ...params,
-                siteId: this.siteId
-            }
+                siteId: this.siteId,
+            },
+            ...this.signal && {cancelToken: this.signal.token},
         }).then(response => response.data);
     }
 }
